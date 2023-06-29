@@ -1,0 +1,190 @@
+<body>
+  <section class="container section-register" [@deArribaHaciaAbajo]>
+    <div class="row g-4 container-form mx-auto">
+      <h3 class="text-center">Iniciar sesión</h3>
+
+      <div class="col-md-5 col-lg-7 mx-auto">
+        <form
+          [formGroup]="formulario"
+          (ngSubmit)="submit()"
+          class="needs-validation"
+        >
+          <div class="row g-4">
+            <div class="col-sm-12">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                formControlName="email"
+                autocomplete="on"
+              />
+              <small
+                *ngIf="
+                  formulario.get('email')?.hasError('required') &&
+                  formulario.get('email')?.touched
+                "
+                class="text-danger"
+                >El correo electrónico es requerido</small
+              >
+            </div>
+            <div class="col-sm-12">
+              <label for="password" class="form-label">Constraseña</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="password"
+                autocomplete="off"
+              />
+              <small
+                *ngIf="
+                  formulario.get('password')?.hasError('required') &&
+                  formulario.get('password')?.touched
+                "
+                class="text-danger"
+                >La contraseña es requerida</small
+              >
+              <small
+                *ngIf="
+                  formulario.get('password')?.hasError('minLength') &&
+                  formulario.get('password')?.touched
+                "
+                class="text-danger"
+                >La contraseña debe contener al menos 6 caracteres</small
+              >
+            </div>
+            <div *ngIf="this.authService.msjError != ''" class="col-md-12">
+              <label class="text-danger"
+                >- {{ this.authService.msjError }}</label
+              >
+            </div>
+
+            <!-- <hr class="my-4" /> -->
+
+            <div>
+              <button
+                class="w-100 btn btn-primary btn-lg"
+                type="submit"
+                [disabled]="formulario.invalid"
+                [hidden]="spinner"
+              >
+                Ingresar
+              </button>
+            </div>
+            <div
+              [hidden]="!spinner"
+              class="spinner-border text-dark mx-auto"
+              role="status"
+            >
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-5 col-lg-8 order-md-last mx-auto">
+        <label for="especialidades" class="form-label" style="margin: 20px 0px"
+          >Si usted no se ha registrado nunca en el portal pero es paciente de
+          nuestra institución, ingrese en la opción Acceder/Registrarme para
+          crear su usuario.</label
+        >
+      </div>
+    </div>
+    <hr class="my-4" />
+    <h3 class="text-center">Accesos</h3>
+    <div class="quick-access-buttons">
+
+      <button class="quick-access-button admin" (click)="onAdmin1()">
+        <img src="https://firebasestorage.googleapis.com/v0/b/clinica-orce-patricio.appspot.com/o/especialistas1687214587185.png?alt=media&token=08b0da1f-0787-4763-9519-6724af33d8bd" alt="Imagen de perfil del especialista">
+        <span>Patricio<br>(Admin)</span>
+      </button>
+    
+      <button class="quick-access-button specialist" (click)="onEspecialista1()">
+        <img src="https://firebasestorage.googleapis.com/v0/b/clinica-orce-patricio.appspot.com/o/especialistas1687475303839.png?alt=media&token=9feb6a66-760a-45c0-9c3a-388705e7347c" alt="Imagen de perfil del paciente">
+        <span>Hibbert<br>(Especialista)</span>
+      </button>
+    
+      <button class="quick-access-button patient" (click)="onEspecialista2()">
+        <img src="https://firebasestorage.googleapis.com/v0/b/clinica-orce-patricio.appspot.com/o/especialistas1687475037153.png?alt=media&token=e6f65357-996c-491d-9e5c-12a4ba823c4d" alt="Imagen de perfil del paciente">
+        <span>Nick<br>(Especialista)</span>
+      </button>
+    
+      <button class="quick-access-button admin" (click)="onPaciente1()">
+        <img src="https://firebasestorage.googleapis.com/v0/b/clinica-orce-patricio.appspot.com/o/pacientes1687216146364.png?alt=media&token=cc5d53d8-1cc7-4ce1-bb69-b4306d1548ac" alt="Imagen de perfil del administrador">
+        <span>Leandro<br>(Paciente)</span>
+      </button>
+    
+      <button class="quick-access-button admin" (click)="onPaciente2()">
+        <img src="https://firebasestorage.googleapis.com/v0/b/clinica-orce-patricio.appspot.com/o/pacientes1687225575713.png?alt=media&token=43a9ad21-2b1b-49de-bc72-3ffcc3761edb" alt="Imagen de perfil del administrador">
+        <span>Bender<br>(Paciente)</span>
+      </button>
+    
+      <button class="quick-access-button admin" (click)="onPaciente3()">
+        <img src="https://firebasestorage.googleapis.com/v0/b/clinica-orce-patricio.appspot.com/o/pacientes1687223112299.png?alt=media&token=e743302a-4325-46e4-a8ba-a8a2cd787eae" alt="Imagen de perfil del administrador">
+        <span>Jose<br>(Paciente)</span>
+      </button>
+    
+    </div>
+    <!-- <div class="container-table table-responsive">
+      <table class="mx-auto">
+        <thead class="">
+          <tr>
+            <th>ADMIN</th>
+            <th>ESPECIALISTA</th>
+            <th>ESPECIALISTA</th>
+            <th>PACIENTE</th>
+            <th>PACIENTE</th>
+            <th>PACIENTE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img
+                src="../../../../../assets/admin/yo.jfif"
+                alt="img-usuario"
+                (click)="onAdmin1()"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../../../assets/doctores/gomez-doctor.jfif"
+                alt="img-usuario"
+                (click)="onEspecialista1()"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../../../assets/doctores/paulda-doctora.jpg"
+                alt="img-usuario"
+                (click)="onEspecialista2()"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../../../assets/pacientes/p-1-1.jfif"
+                alt="img-usuario"
+                (click)="onPaciente1()"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../../../assets/pacientes/p2-1.webp"
+                alt="img-usuario"
+                (click)="onPaciente2()"
+              />
+            </td>
+            <td>
+              <img
+                src="../../../../../assets/pacientes/p3-2.jpg"
+                alt="img-usuario"
+                (click)="onPaciente3()"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+  </section>
+  
+</body>
